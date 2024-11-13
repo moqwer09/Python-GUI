@@ -62,7 +62,7 @@ def updateVals():
                     maxV = max(maxV, float(volt))
                     maxVBoard = (board+1) if maxV == float(volt) else maxVBoard
                     voltages[board][tap].set(volt + 'V')
-            
+                    
             for board in range(10):
                 for temp in range(9):
                     tempature = str(packets[173 + temp + 12*board])
@@ -107,50 +107,50 @@ resetGlobalMax = ttk.Button(master=minMaxFrame, text='Reset All Time Values', co
 resetGlobalMax.pack(side='top', fill='x')
 
 #Min Vals
-minLabel = ttk.Label(master=minMaxFrame, text='Min Values', anchor="center")
-minLabel.pack(side='top', fill='both')
+minLabel = ttk.Label(master=minMaxFrame, text='Min Values', anchor="center", font='helvetica 12')
+minLabel.pack(side='top', fill='both', pady=8)
 minFrame = ttk.Frame(master=minMaxFrame)
 #volt
 minVoltFrame = ttk.Frame(master=minFrame)
-minVoltLabel = ttk.Label(master=minVoltFrame, text='Voltage:', anchor="center")
+minVoltLabel = ttk.Label(master=minVoltFrame, text='Voltage:', anchor="center", font='helvetica 12')
 minVoltLabel.pack(side='top')
-minVoltVal = ttk.Label(master=minVoltFrame, textvariable=minVolt, anchor="center")
+minVoltVal = ttk.Label(master=minVoltFrame, textvariable=minVolt, anchor="center", font='helvetica 12')
 minVoltVal.pack(side='top')
-minVBLabel = ttk.Label(master=minVoltFrame, textvariable=minVoltBoard, anchor='center')
+minVBLabel = ttk.Label(master=minVoltFrame, textvariable=minVoltBoard, anchor='center', font='helvetica 12')
 minVBLabel.pack(side='top')
 minVoltFrame.pack(side='left', expand=True, fill='both')
 #temp
 minTempFrame = ttk.Frame(master=minFrame)
-minTempLabel = ttk.Label(master=minTempFrame, text='Temp:', anchor="center")
+minTempLabel = ttk.Label(master=minTempFrame, text='Temp:', anchor="center", font='helvetica 12')
 minTempLabel.pack(side='top')
-minTempVal = ttk.Label(master=minTempFrame, textvariable=minTemp, anchor="center")
+minTempVal = ttk.Label(master=minTempFrame, textvariable=minTemp, anchor="center", font='helvetica 12')
 minTempVal.pack(side='top')
-minTBLabel = ttk.Label(master=minTempFrame, textvariable=minTempBoard, anchor='center')
+minTBLabel = ttk.Label(master=minTempFrame, textvariable=minTempBoard, anchor='center', font='helvetica 12')
 minTBLabel.pack(side='top')
 minTempFrame.pack(side='left', expand=True, fill='both')
 
 minFrame.pack(side='top', expand=False, fill='x')
 
 #High Vals
-maxLabel = ttk.Label(master=minMaxFrame, text='Max Values', anchor="center")
-maxLabel.pack(side='top', fill='x')
+maxLabel = ttk.Label(master=minMaxFrame, text='Max Values', anchor="center", font='helvetica 12')
+maxLabel.pack(side='top', fill='x', pady=8)
 maxFrame = ttk.Frame(master=minMaxFrame)
 #volt
 maxVoltFrame = ttk.Frame(master=maxFrame)
-maxVoltLabel = ttk.Label(master=maxVoltFrame, text='Voltage:', anchor="center")
+maxVoltLabel = ttk.Label(master=maxVoltFrame, text='Voltage:', anchor="center", font='helvetica 12')
 maxVoltLabel.pack(side='top')
-maxVoltVal = ttk.Label(master=maxVoltFrame, textvariable=maxVolt, anchor="center")
+maxVoltVal = ttk.Label(master=maxVoltFrame, textvariable=maxVolt, anchor="center", font='helvetica 12')
 maxVoltVal.pack(side='top')
-maxVBLabel = ttk.Label(master=maxVoltFrame, textvariable=maxVoltBoard, anchor='center')
+maxVBLabel = ttk.Label(master=maxVoltFrame, textvariable=maxVoltBoard, anchor='center', font='helvetica 12')
 maxVBLabel.pack(side='top')
 maxVoltFrame.pack(side='left', expand=True, fill='both')
 #temp
 maxTempFrame = ttk.Frame(master=maxFrame)
-maxTempLabel = ttk.Label(master=maxTempFrame, text='Temp:', anchor="center")
+maxTempLabel = ttk.Label(master=maxTempFrame, text='Temp:', anchor="center", font='helvetica 12')
 maxTempLabel.pack(side='top')
-maxTempVal = ttk.Label(master=maxTempFrame, textvariable=maxTemp, anchor="center")
+maxTempVal = ttk.Label(master=maxTempFrame, textvariable=maxTemp, anchor="center", font='helvetica 12')
 maxTempVal.pack(side='top')
-maxTBLabel = ttk.Label(master=maxTempFrame, textvariable=maxTempBoard, anchor='center')
+maxTBLabel = ttk.Label(master=maxTempFrame, textvariable=maxTempBoard, anchor='center', font='helvetica 12')
 maxTBLabel.pack(side='top')
 maxTempFrame.pack(side='left', expand=True, fill='both')
 
@@ -158,25 +158,25 @@ maxFrame.pack(side='top', expand=False, fill='x')
 
 
 #All Time High Vals
-maxAllLabel = ttk.Label(master=minMaxFrame, text='All Time Max Values', anchor="center")
-maxAllLabel.pack(side='top', fill='x')
+maxAllLabel = ttk.Label(master=minMaxFrame, text='All Time Max Values', anchor="center", font='helvetica 12')
+maxAllLabel.pack(side='top', fill='x', pady=8)
 maxAllFrame = ttk.Frame(master=minMaxFrame)
 #volt
 maxAllVoltFrame = ttk.Frame(master=maxAllFrame)
-maxAllVoltLabel = ttk.Label(master=maxAllVoltFrame, text='Voltage:', anchor="center")
+maxAllVoltLabel = ttk.Label(master=maxAllVoltFrame, text='Voltage:', anchor="center", font='helvetica 12')
 maxAllVoltLabel.pack(side='top')
-maxAllVoltVal = ttk.Label(master=maxAllVoltFrame, textvariable=maxAllVolt, anchor="center")
+maxAllVoltVal = ttk.Label(master=maxAllVoltFrame, textvariable=maxAllVolt, anchor="center", font='helvetica 12')
 maxAllVoltVal.pack(side='top')
-maxAVBLabel = ttk.Label(master=maxAllVoltFrame, textvariable=maxAllVoltBoard, anchor='center')
+maxAVBLabel = ttk.Label(master=maxAllVoltFrame, textvariable=maxAllVoltBoard, anchor='center', font='helvetica 12')
 maxAVBLabel.pack(side='top')
 maxAllVoltFrame.pack(side='left', expand=True, fill='both')
 #temp
 maxAllTempFrame = ttk.Frame(master=maxAllFrame)
-maxAllTempLabel = ttk.Label(master=maxAllTempFrame, text='Temp:', anchor="center")
+maxAllTempLabel = ttk.Label(master=maxAllTempFrame, text='Temp:', anchor="center", font='helvetica 12')
 maxAllTempLabel.pack(side='top')
-maxAllTempVal = ttk.Label(master=maxAllTempFrame, textvariable=maxAllTemp, anchor="center")
+maxAllTempVal = ttk.Label(master=maxAllTempFrame, textvariable=maxAllTemp, anchor="center", font='helvetica 12')
 maxAllTempVal.pack(side='top')
-maxATBLabel = ttk.Label(master=maxAllTempFrame, textvariable=maxAllTempBoard, anchor='center')
+maxATBLabel = ttk.Label(master=maxAllTempFrame, textvariable=maxAllTempBoard, anchor='center', font='helvetica 12')
 maxATBLabel.pack(side='top')
 maxAllTempFrame.pack(side='left', expand=True, fill='both')
 
@@ -231,7 +231,7 @@ for i in range(10):
     tabs[i] = ttk.Frame(master=notebook)
 
     #Voltage taps
-    voltLabel = ttk.Label(master=tabs[i], text='Voltages', anchor='center')
+    voltLabel = ttk.Label(master=tabs[i], text='Voltages', anchor='center', font='helvetica 18')
     voltLabel.pack(side='top', fill='x', pady=10)
     topBottom = {}
     topBottom[0] = ttk.Frame(master=tabs[i])
@@ -241,35 +241,35 @@ for i in range(10):
 
     for rows in range(2):
         for cols in range(7):
-            tapFrames[rows*7 + cols] = ttk.Frame(master=topBottom[rows])
+            tapFrames[rows*7 + cols] = ttk.Frame(master=topBottom[rows], relief='solid', borderwidth=1)
     
     #Placing Tap Labels
     for row in range(2):
         for column in range(7):
             #voltages[i][row*7 + column] = str(i*10 + row*7 + column) + 'V' #Testing
-            tapLabel = ttk.Label(master=tapFrames[row*7 + column], text=('Tap ' + str(((row*7 + column) + 1)) + ': '), anchor='center')
-            tapVal = ttk.Label(master=tapFrames[row*7 + column], textvariable=voltages[i][row*7 + column], anchor='center')
-            tapLabel.pack(side='top', fill='both')
-            tapVal.pack(side='top', expand=True, fill='both')
+            tapLabel = ttk.Label(master=tapFrames[row*7 + column], text=('Tap ' + str(((row*7 + column) + 1)) + ':'), anchor='center', font='helvetica 14')
+            tapVal = ttk.Label(master=tapFrames[row*7 + column], textvariable=voltages[i][row*7 + column], anchor='center', font='helvetica 14')
+            tapLabel.pack(side='top', expand=True)
+            tapVal.pack(side='top', expand=True)
             tapFrames[row*7 + column].pack(side='left', expand=True, fill='both')
     #Place Frame
     topBottom[0].pack(side='top', expand=True, fill='both')
     topBottom[1].pack(side='top', expand=True, fill='both')
     
     #Temp taps
-    tempLabel = ttk.Label(master=tabs[i], text='Temperatures', anchor='center')
+    tempLabel = ttk.Label(master=tabs[i], text='Temperatures', anchor='center', font='helvetica 18')
     tempLabel.pack(side='top', fill='x', pady=10)
     tempFr = ttk.Frame(master=tabs[i])
     tempFrames = {}
     for cols in range(9):
-        tempFrames[cols] = ttk.Frame(master=tempFr)
+        tempFrames[cols] = ttk.Frame(master=tempFr, relief='solid', borderwidth=1)
     #Placing Tap Labels
     for column in range(9):
         #temps[i][column] = str(i*10 + column) + 'C' #Testing
-        tempLabel = ttk.Label(master=tempFrames[column], text=('Temp ' + str(column+1)), anchor='center')
-        tempVal = ttk.Label(master=tempFrames[column], textvariable=temps[i][column], anchor='center')
-        tempLabel.pack(side='top', fill='both')
-        tempVal.pack(side='top', expand=True, fill='both')
+        tempLabel = ttk.Label(master=tempFrames[column], text=('Temp ' + str(column+1) + ':'), anchor='center', font='helvetica 14')
+        tempVal = ttk.Label(master=tempFrames[column], textvariable=temps[i][column], anchor='center', font='helvetica 14')
+        tempLabel.pack(side='top', expand=True)
+        tempVal.pack(side='top', expand=True)
         tempFrames[column].pack(side='left', expand=True, fill='both')
 
     tempFr.pack(side='top', expand=True, fill='both')
