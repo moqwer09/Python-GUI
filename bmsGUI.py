@@ -1,7 +1,13 @@
 import serial.tools.list_ports 
 import tkinter as tk
 import ttkbootstrap as ttk
-from time import sleep
+from time import sleep, ctime, localtime
+import csv
+import os
+
+#print(ctime()) time as a string
+#print(localtime()) time as a struct
+isLogging = 0
 
 #Initialize serial
 serialInst = serial.Serial()
@@ -38,6 +44,7 @@ def updateVals():
         minTBoard = 0
         maxT = 0.0
         maxTBoard = 0
+        csvRow = []
         serialInst.reset_input_buffer()
         packets = []
 
@@ -52,20 +59,30 @@ def updateVals():
         
         if len(packets) == 383:
             del packets[171:261]
+
+        if (isLogging == 1):
+            csvRow.append(ctime())
         
         if len(packets) == 293:
             for board in range(10):
                 for tap in range(14):
                     volt = str(packets[2 + tap + 17*board])
+                    if (isLogging == 1):
+                        csvRow.append(float(volt))
                     minV = min(minV, float(volt))
                     minVBoard = (board+1) if minV == float(volt) else minVBoard
                     maxV = max(maxV, float(volt))
                     maxVBoard = (board+1) if maxV == float(volt) else maxVBoard
                     voltages[board][tap].set(volt + 'V')
                     
+            if (isLogging == 1):
+                csvRow.append("")    
+                
             for board in range(10):
                 for temp in range(9):
                     tempature = str(packets[173 + temp + 12*board])
+                    if (isLogging == 1):
+                        csvRow.append(float(tempature))
                     minT = min(minT, 999.9 if float(tempature) == 150.0 else float(tempature))
                     minTBoard = (board+1) if minT == float(tempature) else minTBoard
                     maxT = max(maxT, 0.0 if float(tempature) == 150.0 else float(tempature))
@@ -86,9 +103,76 @@ def updateVals():
             maxAllTemp.set(str(max(maxT, float(maxAllTemp.get().rstrip('C')))) + 'C')
             maxAllTempBoard.set(('Board: ' + str(maxTBoard)) if maxAllTemp.get() == maxTemp.get() else maxAllTempBoard.get())
 
+            if (isLogging == 1):
+                with open(path, 'a', newline='') as logCsv:
+                    wr = csv.writer(logCsv, quoting=csv.QUOTE_ALL)
+                    wr.writerow(csvRow)
+
     root.after(1000, updateVals)
 
 root.after(1000, updateVals)
+
+
+def startLogging():
+    global isLogging
+    isLogging = 1
+    logMenu.entryconfig(0, label='Is Logging: Yes')
+
+    
+    #Create folder if it doesn't or open if it does
+    k = 0
+    global path
+    path = str(localtime().tm_mon) + '_' + str(localtime().tm_mday) + '_' + str(localtime().tm_year)
+
+    if not(os.path.exists(path)):
+        os.makedirs(path)
+    
+    #Create file
+    path = path + '\\' + path
+
+    while(os.path.exists(path + '_' + str(k) + '.csv')):
+        k = k + 1
+
+    path = path + '_' + str(k) + '.csv' 
+    
+    #Create top header
+    startRow = []
+    startRow.append('Time')
+    for board in range(10):
+        for tap in range(14):
+            startRow.append('V' + str(board+1) + '.' + str(tap+1))
+
+    startRow.append('')
+
+    for board in range(10):
+        for tap in range(9):
+            startRow.append('T' + str(board+1) + '.' + str(tap+1))
+
+    #Write to csv file
+    with open(path, 'w', newline='') as logCsv:
+        wr = csv.writer(logCsv, quoting=csv.QUOTE_ALL)
+        wr.writerow(startRow)
+    
+def stopLogging():
+    global isLogging
+    isLogging = 0
+    logMenu.entryconfig(0, label='Is Logging: No')
+
+
+#Main menu bar
+menu = tk.Menu(root)
+
+#Sub-menu
+logMenu = tk.Menu(menu, tearoff=False)
+logMenu.add_command(label=('Is Logging: ' + ('Yes' if isLogging == 1 else 'No')))
+logMenu.add_separator()
+logMenu.add_command(label='Start Logging', command=startLogging)
+logMenu.add_command(label='Stop Logging', command=stopLogging)
+menu.add_cascade(label= 'Data Logging to CSV', menu=logMenu)
+
+
+root.configure(menu=menu)
+
 
 def resetAll():
     maxAllVolt.set('0V')
